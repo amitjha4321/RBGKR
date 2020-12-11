@@ -2,16 +2,13 @@ package com.example.rbgkr.Activities;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.Menu;
 
-import com.example.rbgkr.Fragments.CollectionFragments;
+import com.example.rbgkr.Fragments.CollectionsFragments;
 import com.example.rbgkr.Fragments.FavoriteFragment;
 import com.example.rbgkr.Fragments.PhotosFragment;
 import com.example.rbgkr.R;
 import com.example.rbgkr.Utils.Functions;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
@@ -84,7 +81,7 @@ public class MainActivity extends AppCompatActivity
             PhotosFragment photosFragment=new PhotosFragment();
             Functions.changeMainFragment(MainActivity.this,photosFragment);
         }else if(id==R.id.nav_collections){
-            CollectionFragments collectionFragments=new CollectionFragments();
+            CollectionsFragments collectionFragments=new CollectionsFragments();
             Functions.changeMainFragment(MainActivity.this,collectionFragments);
         }else if(id==R.id.nav_favorite){
             FavoriteFragment favoriteFragment=new FavoriteFragment();
