@@ -2,9 +2,13 @@ package com.example.rbgkr.Models;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Photo {
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+
+public class Photo extends RealmObject {
 
     @SerializedName("id")
+    @PrimaryKey
     private String id;
     @SerializedName("description")
     private String description;

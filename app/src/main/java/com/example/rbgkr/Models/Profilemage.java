@@ -2,7 +2,9 @@ package com.example.rbgkr.Models;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Profilemage {
+import io.realm.RealmObject;
+
+public class Profilemage extends RealmObject {
 
     @SerializedName("small")
     private String small;
