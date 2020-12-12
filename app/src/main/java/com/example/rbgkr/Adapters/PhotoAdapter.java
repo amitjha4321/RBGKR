@@ -1,14 +1,17 @@
 package com.example.rbgkr.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.rbgkr.Activities.FullScreenPhotoActivity;
 import com.example.rbgkr.Models.Photo;
 import com.example.rbgkr.R;
 import com.example.rbgkr.Utils.GlideApp;
@@ -18,6 +21,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder> {
@@ -74,9 +78,22 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder> 
         @BindView(R.id.item_photo_photo)
         SquareImage photo;
 
+        @BindView(R.id.item_photo_layout)
+        FrameLayout frameLayout;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);
+        }
+
+        @OnClick(R.id.item_photo_layout)
+        public void setFrameLayout(){
+        //if user click to item photo then FullscreenPhoto activity will be opened...
+            int position=getAdapterPosition();
+            String photoId= photos.get(position).getId();
+            Intent intent=new Intent(context, FullScreenPhotoActivity.class);
+            intent.putExtra("photoId",photoId);
+            context.startActivity(intent);
         }
     }
 }

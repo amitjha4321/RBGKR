@@ -33,15 +33,15 @@
             android:textStyle="bold"/>
     </LinearLayout>
 
-    <com.github.clans.fab.FloatingActionButton
+    <com.github.clans.fab.FloatingActionMenu
         android:id="@+id/activity_fullscreen_photo_fab_menu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_margin="8dp"
-        app:fab_colorNormal="@color/colorAccent"
-        app:fab_colorPressed="@color/colorAccent">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:menu_colorNormal="@color/colorAccent"
+        app:menu_colorPressed="@color/colorAccent"
+        android:layout_margin="8dp">
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/activity_fullscreen_photo_fab_favorite"
@@ -52,8 +52,9 @@
             app:fab_colorNormal="#FFE049"
             app:fab_label="Favorite"/>
 
+
         <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/activity_fullscreen_photo_fab_wallpaper"
+            android:id="@+id/activity_fullscreen_photo_fab_set_wallpaper"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:fab_size="mini"
@@ -61,7 +62,7 @@
             app:fab_colorNormal="#FFE049"
             app:fab_label="Wallpaper"/>
 
-    </com.github.clans.fab.FloatingActionButton>
+    </com.github.clans.fab.FloatingActionMenu>
 
 
 
