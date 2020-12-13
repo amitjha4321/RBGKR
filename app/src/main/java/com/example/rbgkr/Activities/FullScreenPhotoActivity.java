@@ -3,6 +3,7 @@ package com.example.rbgkr.Activities;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.WindowManager;
@@ -20,12 +21,14 @@ import com.example.rbgkr.Models.Photo;
 import com.example.rbgkr.R;
 import com.example.rbgkr.Utils.Functions;
 import com.example.rbgkr.Utils.GlideApp;
+import com.example.rbgkr.Utils.RealmController;
 import com.example.rbgkr.Webservices.ApiInterface;
 import com.example.rbgkr.Webservices.ServiceGenerator;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 
 
+import butterknife.BindDrawable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -56,11 +59,21 @@ public class FullScreenPhotoActivity extends AppCompatActivity {
     @BindView(R.id.activity_fullscreen_photo_username)
     TextView username;
 
+    @BindDrawable(R.drawable.ic_check_favorite)
+    Drawable icFavorite;
+
+    @BindDrawable(R.drawable.ic_check_favorited)
+    Drawable icFavorited;
+
     Bitmap photoBitmap;
+
+
+
+    private RealmController realmController;
 
     private Unbinder unbinder;
 
-
+    private Photo photo;
 
 
     @Override
@@ -73,6 +86,12 @@ public class FullScreenPhotoActivity extends AppCompatActivity {
         Intent intent=getIntent();
         String photoId=intent.getStringExtra("photoId");
         getPhoto(photoId);
+
+        realmController= new RealmController();
+        if (realmController.isPhotoExists(photoId)){
+            fabFavorite.setImageDrawable(icFavorited);
+        }
+
     }
 
     public void getPhoto(String photoId){
@@ -83,7 +102,7 @@ public class FullScreenPhotoActivity extends AppCompatActivity {
             public void onResponse(Call<Photo> call, Response<Photo> response) {
                 if (response.isSuccessful()){
                     Log.d(TAG, "success");
-                    Photo photo= response.body();
+                    photo= response.body();
                     updateUI(photo);
                 }else {
                     Log.e(TAG, response.message());
@@ -129,6 +148,16 @@ public class FullScreenPhotoActivity extends AppCompatActivity {
 
     @OnClick(R.id.activity_fullscreen_photo_fab_favorite)
     public void setFavFavorite(){
+
+        if (realmController.isPhotoExists(photo.getId())){
+            realmController.deletePhoto(photo);
+            fabFavorite.setImageDrawable(icFavorite);
+            Toast.makeText(FullScreenPhotoActivity.this,"Remove Favorite",Toast.LENGTH_SHORT).show();
+        }else {
+            realmController.savePhoto(photo);
+            fabFavorite.setImageDrawable(icFavorited);
+            Toast.makeText(FullScreenPhotoActivity.this,"Favorited",Toast.LENGTH_SHORT).show();
+        }
         fabMenu.close(true);
 
     }
